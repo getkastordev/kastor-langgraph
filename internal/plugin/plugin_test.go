@@ -59,3 +59,23 @@ func TestValidateRejectsConnectionCredential(t *testing.T) {
 		t.Fatalf("diagnostics = %#v", response.Diagnostics)
 	}
 }
+
+func TestScaffoldIsDeterministic(t *testing.T) {
+	handler := Handler{}
+	first, err := handler.Scaffold(context.Background(), &protocol.ScaffoldRequest{Name: "demo"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	second, err := handler.Scaffold(context.Background(), &protocol.ScaffoldRequest{Name: "demo"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(first.Files) != 5 || len(second.Files) != len(first.Files) {
+		t.Fatalf("files = %d, %d", len(first.Files), len(second.Files))
+	}
+	for i := range first.Files {
+		if first.Files[i].Path != second.Files[i].Path || string(first.Files[i].Data) != string(second.Files[i].Data) {
+			t.Fatalf("scaffold differs at %d", i)
+		}
+	}
+}

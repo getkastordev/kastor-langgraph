@@ -24,6 +24,7 @@ func (Handler) Metadata(context.Context) (protocol.Metadata, error) {
 		Capabilities: protocol.Capabilities{
 			LocalProcesses:    true,
 			CredentialSchemes: []string{protocol.SchemeEnv},
+			Scaffold:          true,
 		},
 	}, nil
 }

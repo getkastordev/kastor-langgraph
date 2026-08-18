@@ -2,7 +2,7 @@
 
 External LangGraph code-generation target for [Kastor](https://github.com/weirdGuy/kastor).
 
-The plugin owns LangGraph-specific validation, Python generation, dependency mapping, MCP bindings, and runtime-tool scaffolds. Kastor core sends canonical protocol-v1 IR and remains responsible for deterministic disk writes.
+The plugin owns LangGraph-specific validation, Python generation, dependency mapping, MCP bindings, runtime-tool scaffolds, and the LangGraph starter returned by `kastor new`. Kastor core sends canonical protocol-v1 IR and remains responsible for deterministic disk writes.
 
 > Status: pre-release. The protocol-v1 implementation is available for integration testing but no stable binary has been released yet.
 
@@ -21,6 +21,10 @@ export KASTOR_PLUGIN_LANGGRAPH=/absolute/path/to/kastor-langgraph
 ```
 
 The source address is `github.com/getkastordev/kastor-langgraph`.
+
+Once releases are published, users install and lock this plugin with
+`kastor init`; `kastor new` selects it by default. Local development overrides
+the locked executable without changing the lock.
 
 ## License
 
